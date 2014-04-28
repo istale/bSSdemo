@@ -1,0 +1,9 @@
+<ion-view title="Join list">
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item ng-repeat="join in joins" type="item-text-wrap" href="#/tab/join/{{join.id}}">
+        {{join.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

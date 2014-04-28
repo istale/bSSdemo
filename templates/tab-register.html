@@ -1,0 +1,53 @@
+<ion-view title="Register">
+  <ion-content class="has-header padding has-bouncing">
+  <div class="list">
+		  <form ng-submit="sign_up()" ng-show="not_loggedin">
+		    
+		      <button ng-click="github_login()" class="button button-calm" >
+				  Github
+			  </button>
+			  <p></p>
+		      <label class="item item-input item-stacked-label">
+			    <span class="input-label">Name</span><span style="padding-left:20px;">validation message</span>
+			    <input type="text" placeholder="my name is .." id="name" name="name" ng-model="register.name">
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Email</span>
+			    <input type="text" placeholder="email" id="email" name="email" ng-model="register.email">
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			    <span class="input-label">Password</span>
+			    <input type="text" placeholder="password" id="password" name="password" ng-model="register.password">
+			  </label>
+			</form>
+
+	  <p></p>
+	  		
+	  		
+			<form ng-submit="registerScreen()" ng-hide="not_loggedin">
+				<h3>olá, {{login_user}}</h3>
+				<label class="item item-input item-stacked-label">
+			    	<span class="input-label">My Favorite Team</span>
+					    <select ng-model="registerScreen.team" ng-options="t.name for t in teams">
+					      <option value="">-- choose team --</option>
+					    </select>
+			  	</label>
+			    <label class="item item-input item-stacked-label">
+			    	<span class="input-label">Game on Screen</span>
+					    <select ng-model="registerScreen.game" ng-options="g.combines for g in games">
+					      <option value="">-- choose game --</option>
+					    </select>
+				</label>
+				<label class="item item-input item-stacked-label">
+				    <span class="input-label">Address</span>
+				    <input type="text" placeholder="loading ..." id="address" name="address" ng-disabled="finishGetLocation" ng-model="registerScreen.address">
+				</label>
+				<button type="submit" class="button button-block button-positive">
+				  <strong>Share my Screen</strong>
+				</button>
+			
+			</form>
+	</div>
+
+  </ion-content>
+</ion-view>

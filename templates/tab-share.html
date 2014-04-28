@@ -1,0 +1,9 @@
+<ion-view title="Share list">
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item ng-repeat="share in shares" type="item-text-wrap" href="#/tab/share/{{share.id}}">
+        {{share.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

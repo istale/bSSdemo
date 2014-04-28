@@ -1,0 +1,73 @@
+<ion-view title="Map">
+  <ion-content class="has-header">
+	
+	<!-- <h1>{{mapIsReady}}</h1> -->
+	<google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" ng-if="mapIsReady">
+		<marker coords="myLocaitionMarker.coords"></marker>
+		<markers models="partyMarkers" coords="'self'" icon="'icon'" click="'onClicked'"></markers>
+
+		<!-- <button class="button button-balanced" style="position:absolute; top:5px !important; right: 5px !important; z-index:1000 !important;" id="mapRegister" ng-click="actionRegister()">
+		  Regitster !!
+		</button> -->
+
+	</google-map>
+
+<!-- 	<button class="button button-balanced" style="position:absolute; top:5px !important; right: 5px !important; z-index:1000 !important;" id="mapRegister" ng-click="actionRegister()">
+		  Regitster !!
+		</button> -->
+
+<script id="modal.html" type="text/ng-template">
+	<div class="modal" ng-controller="ModalCtrl">
+		<ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">Party Infomation</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+      	
+      	<ion-content class="padding">
+		  	<form ng-submit="Join_the_party()">
+			    <div class="list">
+			      <label class="item item-input item-stacked-label">
+				    <span class="input-label">Game on Screen</span><span style="padding-left:20px;">validation message</span>
+				    <input type="text" id="game_on_screen" name="game_on_screen" ng-model="party_info.game_on_screen" ng-disabled="true">
+				  </label>
+				  <label class="item item-input item-stacked-label">
+				    <span class="input-label">Address</span>
+				    <input type="text" id="party_address" name="party_address" ng-model="party_info.party_address" ng-disabled='true'>
+				  </label>
+			      <label class="item item-input item-stacked-label">
+				    <span class="input-label">Owner Name</span>
+				    <input type="text" id="owner_name" name="owner_name" ng-model="party_info.owner_name" ng-disabled='true'>
+				  </label>
+				  <label class="item item-input item-stacked-label">
+				    <span class="input-label">Owner Email</span>
+				    <input type="text" id="owner_email" name="owner_email" ng-model="party_info.owner_email" ng-disabled='true'>
+				  </label>
+				  <br>
+				  I want to join the party, and I am ...
+				  <label class="item item-input item-stacked-label">
+				    <span class="input-label">Name</span>
+				    <input type="text" placeholder="my name is .." id="name" name="name" ng-model="register.name">
+				  </label>
+				  <label class="item item-input item-stacked-label">
+				    <span class="input-label">Email</span>
+				    <input type="text" placeholder="email" id="email" name="email" ng-model="register.email">
+				  </label>
+				  <label class="item item-input item-stacked-label">
+				    <span class="input-label">Password</span>
+				    <input type="text" placeholder="password" id="password" name="password" ng-model="register.password">
+				  </label>
+				</div>
+
+				<button type="submit" class="button button-block button-positive">
+				  <strong>Join the Party !!!!!</strong>
+				</button>
+			</form>
+			<br>
+
+		  </ion-content>
+	</div>
+</script>
+
+
+  </ion-content>
+</ion-view>
