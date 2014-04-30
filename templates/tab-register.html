@@ -2,9 +2,12 @@
   <ion-content class="has-header padding has-bouncing">
   <div class="list">
 		  <form ng-submit="sign_up()" ng-show="not_loggedin">
-		    
-		      <button ng-click="github_login()" class="button button-calm" >
+		      
+		      <button ng-click="oauth_login('github')" class="button button-calm" >
 				  Github
+			  </button>
+			  <button ng-click="oauth_login('facebook')" class="button button-calm" >
+				  Facebook
 			  </button>
 			  <p></p>
 		      <label class="item item-input item-stacked-label">

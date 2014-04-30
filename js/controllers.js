@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ngSails'])
+angular.module('starter.controllers', ['ngSails', 'utility'])
 
 .controller('MapCtrl', function($q, $scope, $state, $ionicModal, $sails, $timeout, PartyService, GlobalService) {
     
@@ -328,7 +328,7 @@ angular.module('starter.controllers', ['ngSails'])
   // $scope.share = Shares.get($stateParams.shareId);
 })
 
-.controller('RegisterCtrl', function($scope, $http, $cookies, $timeout,$log, $sails, $ionicLoading, TeamService, GameService, UserService, PartyService, GlobalService ) {
+.controller('RegisterCtrl', function($scope, $http, $cookies, $timeout,$log, $sails, $ionicLoading, utils, TeamService, GameService, UserService, PartyService, GlobalService ) {
 
   $scope.register = {};
   $scope.new_user = {};
@@ -398,14 +398,20 @@ angular.module('starter.controllers', ['ngSails'])
       console.log("geolcation not work");
     });
 
-  $scope.github_login = function(){
+  $scope.oauth_login = function(provider){
 
     console.log('github_login');
 
     // 將此 global variable 設為 false，表示進入登入過程
     GlobalService.check_login_status =false;
 
-    var win = window.open('/auth/github','_self','centerscreen=true');
+    if (provider == 'github'){
+      var url = utils.prepareUrl('auth/github');
+    }else if(provider == 'facebook'){
+      var url = utils.prepareUrl('auth/facebook');
+    }
+
+    window.open(url,"Login","top=500, left=500, width=400, height=400");
 
     // $scope.loading = $ionicLoading.show({
     //     content: 'Loading...',

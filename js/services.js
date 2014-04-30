@@ -1,4 +1,4 @@
-angular.module('starter.services', ['ngSails'])
+angular.module('starter.services', ['ngSails', 'utility'])
 
 /**
  * A simple example service that returns some data.
@@ -12,14 +12,14 @@ angular.module('starter.services', ['ngSails'])
   
 })
 
-.factory('PartyService', function($q, $sails){
+.factory('PartyService', function($q, $sails, utils){
 	var factory = {};
 
 	factory.getAll = function(){
 		var deferred = $q.defer();
-		var url = '/party/list_for_map';
+		var url = utils.prepareUrl('party/list_for_map');
 
-		$sails.get('/party/list_for_map', function(models){
+		$sails.get(url, function(models){
 			return deferred.resolve(models);
 		});
 
@@ -31,7 +31,7 @@ angular.module('starter.services', ['ngSails'])
 	factory.create = function(partyObj){
 
 		var deferred = $q.defer();
-		var url = '/party/create';
+		var url = utils.prepareUrl('party/create');
 
 		$sails.post(url, partyObj, function(party){
 			if (party !== 'party_already_registered'){
@@ -49,15 +49,15 @@ angular.module('starter.services', ['ngSails'])
 
 })
 
-.factory('TeamService', function($q, $sails){
+.factory('TeamService', function($q, $sails, utils){
 
 	var factory = {};
 
 	factory.getAll = function(){
 		var deferred = $q.defer();
-		var url = '/team';
+		var url = utils.prepareUrl('team');
 
-		$sails.get('/team', function(models){
+		$sails.get(url, function(models){
 			return deferred.resolve(models);
 		});
 
@@ -67,15 +67,15 @@ angular.module('starter.services', ['ngSails'])
 	return factory;
 })
 
-.factory('GameService', function($q, $sails){
+.factory('GameService', function($q, $sails, utils){
 
 	var factory = {};
 
 	factory.getAll = function(){
 		var deferred = $q.defer();
-		var url = '/game';
+		var url = utils.prepareUrl('game');
 
-		$sails.get('/game', function(models){
+		$sails.get(url, function(models){
 			return deferred.resolve(models);
 		});
 		
@@ -91,7 +91,7 @@ angular.module('starter.services', ['ngSails'])
 
 	this.getAll = function() {
 		var deferred = $q.defer();
-		var url = '/user';
+		var url = utils.prepareUrl('user');
 
 		$sails.get(url, function(models) {
 			return deferred.resolve(models);
@@ -102,7 +102,9 @@ angular.module('starter.services', ['ngSails'])
 
 	this.getOne = function(id) {
 		var deferred = $q.defer();
-		var url = '/user/' + id;
+		var temp_url = 'user/' + id;
+		var url = utils.prepareUrl(temp_url);
+		
 
 		$sails.get(url, function(model) {
 			return deferred.resolve(model);
@@ -113,7 +115,7 @@ angular.module('starter.services', ['ngSails'])
 
 	this.create = function(newModel) {
 		var deferred = $q.defer();
-		var url = '/user/create';
+		var url = utils.prepareUrl('user/create');
 
 		$sails.post(url, newModel, function(model) {
 			return deferred.resolve(model);
@@ -125,7 +127,7 @@ angular.module('starter.services', ['ngSails'])
 	this.update = function(user){
 
 		var deferred = $q.defer();
-		var url = '/user/update';
+		var url = utils.prepareUrl('user/update');
 
 		console.log('inside user update');
 		console.log(user);

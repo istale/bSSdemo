@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','google-maps','ngCookies','ngSails'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','google-maps','ngCookies','ngSails','utility'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -95,7 +95,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
   //================================================
     // Check if the user is connected
     //================================================
-  function checkLoggedin($q, $timeout, $http, $location, $rootScope, GlobalService){
+  function checkLoggedin($q, $timeout, $http, $location, $rootScope, GlobalService, utils){
 
       //讓重新進入controller後，可以把loading停下來
       GlobalService.check_login_status = true;
@@ -103,8 +103,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
       // Initialize a new promise
       var deferred = $q.defer();
 
+      var url = utils.prepareUrl('auth/loggedin');
+
       // Make an AJAX call to check if the user is logged in
-      $http.get('/auth/loggedin').success(function(user){
+      $http.get(url).success(function(user){
         
         // Authenticated
         if (user !== '0'){
@@ -143,7 +145,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
       }
     });
     //================================================
+})
 
+.factory('OAuth', function($state, $stateParams){
+
+  function oauthCallback(){
+    console.log("in OAuth's oauthCallback");
+    $state.transitionTo($state.current, $stateParams, {
+        reload: true,
+        inherit: false,
+        notify: true
+    });
+  }
+
+  return{
+    oauthCallback: oauthCallback
+  };
 
 });
+
+
+// Global function called back by the OAuth login dialog
+function oauthCallback() {
+    console.log("in oauthCallback");
+    var injector = angular.element(document.getElementById('main')).injector();
+    injector.invoke(function (OAuth) {
+        OAuth.oauthCallback();
+    });
+}
 
