@@ -164,7 +164,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
  function login_win_LoadStop(event) {
        console.log('login_win_loadstop');
        console.log(event.url);
-       if(event.url == "http://icdt-dev.cloudapp.net:1337/oauthcallback.html" || event.url.indexOf('oauthcallback') > 0){
+       if(event.url == "http://icdt-dev.cloudapp.net:1337/oauthcallback.html" || 
+          event.url == "http://icdt-dev.cloudapp.net:1337/oauthcallback.html#_=_" ||
+          event.url.indexOf('oauthcallback') > 0){
 
            login_win.close();
 
