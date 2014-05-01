@@ -163,6 +163,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
  function login_win_LoadStop(event) {
        if(event.url == "http://icdt-dev.cloudapp.net:1337/oauthcallback.html"){
            login_win.close();
+           $state.transitionTo($state.current, $stateParams, {
+                reload: true,
+                inherit: false,
+                notify: true
+            });
        }
   }
 
