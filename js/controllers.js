@@ -328,7 +328,7 @@ angular.module('starter.controllers', ['ngSails', 'utility'])
   // $scope.share = Shares.get($stateParams.shareId);
 })
 
-.controller('RegisterCtrl', function($scope, $http, $cookies, $timeout,$log, $sails, $ionicLoading, utils, TeamService, GameService, UserService, PartyService, GlobalService ) {
+.controller('RegisterCtrl', function($scope, $http, $cookies, $timeout,$log, $sails, $ionicLoading, utils, TeamService, GameService, UserService, PartyService, GlobalService, OAuthService ) {
 
   $scope.register = {};
   $scope.new_user = {};
@@ -411,7 +411,8 @@ angular.module('starter.controllers', ['ngSails', 'utility'])
       var url = utils.prepareUrl('auth/facebook');
     }
 
-    window.open(url,"Login","top=500, left=500, width=400, height=400");
+    OAuthService.open_oauthWindow(url);
+    // window.open(url,"Login","top=500, left=500, width=400, height=400");
 
     // $scope.loading = $ionicLoading.show({
     //     content: 'Loading...',

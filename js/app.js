@@ -147,7 +147,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
     //================================================
 })
 
-.factory('OAuth', function($state, $stateParams){
+.factory('OAuthService', function($state, $stateParams){
+
+  var win=null;
+
+  function open_oauthWindow(url){
+    // var left = (screen.width/2)-(w/2);
+    // var top = (screen.height/2)-(h/2);  
+    win = window.open(url,"_blank","location=no");
+  }
 
   function oauthCallback(){
     console.log("in OAuth's oauthCallback");
@@ -156,9 +164,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
         inherit: false,
         notify: true
     });
+    win.close();
   }
 
   return{
+    open_oauthWindow : open_oauthWindow,
     oauthCallback: oauthCallback
   };
 
@@ -169,8 +179,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
 function oauthCallback() {
     console.log("in oauthCallback");
     var injector = angular.element(document.getElementById('main')).injector();
-    injector.invoke(function (OAuth) {
-        OAuth.oauthCallback();
+    injector.invoke(function (OAuthService) {
+        OAuthService.oauthCallback();
     });
 }
 
