@@ -420,6 +420,10 @@ angular.module('starter.controllers', ['ngSails', 'utility'])
 
   };
 
+  $scope.logout = function(){
+    OAuthService.logout();
+  }
+
   // 在 app.js 的 checkLoggedin 中將GlobalService.check_login_status設為true，在重新進入controller後會執行下面把loading關掉
   // 
   if (GlobalService.check_login_status == true){

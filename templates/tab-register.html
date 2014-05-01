@@ -26,31 +26,34 @@
 
 	  <p></p>
 	  		
-	  		
-			<form ng-submit="registerScreen()" ng-hide="not_loggedin">
-				<h3>olá, {{login_user}}</h3>
-				<label class="item item-input item-stacked-label">
-			    	<span class="input-label">My Favorite Team</span>
-					    <select ng-model="registerScreen.team" ng-options="t.name for t in teams">
-					      <option value="">-- choose team --</option>
-					    </select>
-			  	</label>
-			    <label class="item item-input item-stacked-label">
-			    	<span class="input-label">Game on Screen</span>
-					    <select ng-model="registerScreen.game" ng-options="g.combines for g in games">
-					      <option value="">-- choose game --</option>
-					    </select>
-				</label>
-				<label class="item item-input item-stacked-label">
-				    <span class="input-label">Address</span>
-				    <input type="text" placeholder="loading ..." id="address" name="address" ng-disabled="finishGetLocation" ng-model="registerScreen.address">
-				</label>
-				<button type="submit" class="button button-block button-positive">
-				  <strong>Share my Screen</strong>
-				</button>
-			
-			</form>
-	</div>
+	  		<div ng-hide="not_loggedin">
+				<form ng-submit="registerScreen()">
+					<h3>olá, {{login_user}}</h3>
+					<label class="item item-input item-stacked-label">
+				    	<span class="input-label">My Favorite Team</span>
+						    <select ng-model="registerScreen.team" ng-options="t.name for t in teams">
+						      <option value="">-- choose team --</option>
+						    </select>
+				  	</label>
+				    <label class="item item-input item-stacked-label">
+				    	<span class="input-label">Game on Screen</span>
+						    <select ng-model="registerScreen.game" ng-options="g.combines for g in games">
+						      <option value="">-- choose game --</option>
+						    </select>
+					</label>
+					<label class="item item-input item-stacked-label">
+					    <span class="input-label">Address</span>
+					    <input type="text" placeholder="loading ..." id="address" name="address" ng-disabled="finishGetLocation" ng-model="registerScreen.address">
+					</label>
+					<button type="submit" class="button button-block button-positive">
+					  <strong>Share my Screen</strong>
+					</button>
 
+				</form>
+				<button class="button button-block button-positive" ng-click="logout()">
+				  <strong>Logout</strong>
+				</button>
+	  		</dsiv>
+	</div>
   </ion-content>
 </ion-view>

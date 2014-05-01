@@ -117,6 +117,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
         // Not Authenticated
         else {
           console.log('checkLoggedin no user');
+          GlobalService.currentUser = false;
           $timeout(deferred.resolve, 0);        //不傳回這樣進不了controller
         }
       });
@@ -147,7 +148,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
     //================================================
 })
 
-.factory('OAuthService', function($state, $stateParams){
+.factory('OAuthService', function($state, $stateParams, $http, utils, GlobalService){
 
   var login_win=null;
 
@@ -162,7 +163,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
 
  function login_win_LoadStop(event) {
        if(event.url == "http://icdt-dev.cloudapp.net:1337/oauthcallback.html"){
+
            login_win.close();
+        
            $state.transitionTo($state.current, $stateParams, {
                 reload: true,
                 inherit: false,
@@ -190,10 +193,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
 
   }
 
-
-
+  function logout(){
+    var url = utils.prepareUrl('auth/logout');
+    console.log(url);
+    $http.get(url).success(function(data){
+      if(data == 'logout'){
+        GlobalService.currentUser = false;
+        $state.transitionTo($state.current, $stateParams, {
+            reload: true,
+            inherit: false,
+            notify: true
+        });
+      }
+    });
+  }
 
   return{
+    logout : logout,
     open_oauthWindow : open_oauthWindow,
     oauthCallback: oauthCallback
   };
