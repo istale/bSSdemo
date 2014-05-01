@@ -149,23 +149,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
 
 .factory('OAuthService', function($state, $stateParams){
 
-  var win=null;
+  var login_win=null;
 
   function open_oauthWindow(url){
     // var left = (screen.width/2)-(w/2);
     // var top = (screen.height/2)-(h/2);  
-    win = window.open(url,"_blank","location=no");
+    login_win = window.open(url,"_blank","location=no");
+    
   }
 
   function oauthCallback(){
+
     console.log("in OAuth's oauthCallback");
+
+    login_win.close();
+
     $state.transitionTo($state.current, $stateParams, {
         reload: true,
         inherit: false,
         notify: true
     });
-    win.close();
+
   }
+
+
+
 
   return{
     open_oauthWindow : open_oauthWindow,
