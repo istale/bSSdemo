@@ -155,7 +155,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
     // var left = (screen.width/2)-(w/2);
     // var top = (screen.height/2)-(h/2);  
     login_win = window.open(url,"_blank","location=no");
+    login_win.addEventListener('loadstop', login_win_LoadStop);
+    login_win.addEventListener('exit', login_win_Close);  
     
+  }
+
+ function login_win_LoadStop(event) {
+       if(event.url == "http://icdt-dev.cloudapp.net:1337/oauthcallback.html"){
+           login_win.close();
+       }
+  }
+
+  function login_win_Close(event) {
+       login_win.removeEventListener('loadstop', login_win_LoadStop);
+       login_win.removeEventListener('exit', login_win_Close);
   }
 
   function oauthCallback(){
