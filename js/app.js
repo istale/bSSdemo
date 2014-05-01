@@ -156,11 +156,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
     // var left = (screen.width/2)-(w/2);
     // var top = (screen.height/2)-(h/2);  
     login_win = window.open(url,"_blank","location=no");
+    
+    // phonegap use
     login_win.addEventListener('loadstop', login_win_LoadStop);
     login_win.addEventListener('exit', login_win_Close);  
     
   }
 
+  //phonegap use
  function login_win_LoadStop(event) {
        console.log('login_win_loadstop');
        console.log(event.url);
@@ -177,12 +180,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','g
             });
        }
   }
-
+  //phonegap use
   function login_win_Close(event) {
        login_win.removeEventListener('loadstop', login_win_LoadStop);
        login_win.removeEventListener('exit', login_win_Close);
   }
 
+  //browser use
   function oauthCallback(){
 
     console.log("in OAuth's oauthCallback");
